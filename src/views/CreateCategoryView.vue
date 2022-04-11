@@ -17,12 +17,10 @@
           :text="formErrors.category_title"
         />
       </div>
-
       <Button text="Create category" />
     </form>
   </div>
 </template>
-
 <script>
 import Button from "../components/Button.vue";
 import LabelInput from "../components/LabelInput.vue";
