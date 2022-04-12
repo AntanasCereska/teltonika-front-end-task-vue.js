@@ -1,6 +1,6 @@
 <template>
   <button
-    @click="onClick()"
+    @click.prevent="onClick"
     :class="['button-icon', backgroundColor && 'button-icon--background-color']"
   >
     <span

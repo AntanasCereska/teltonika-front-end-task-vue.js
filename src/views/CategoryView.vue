@@ -16,23 +16,12 @@
     </Container>
     <Container>
       <div class="category__data">
-        <span
-          v-if="
-            $store.getters.categoryData(
-              categoryId.replaceAll('_', ' '),
-              subcategoryId.replaceAll('_', ' ')
-            ).subsubcategories.length === 0
-          "
-        >
+        <span v-if="filteredSubsubcategories === 0">
           <ErrorMessage text="No sub-sub-categories" size="large" />
         </span>
-
         <div
           class="category__data-item"
-          v-for="subsubcategory in $store.getters.categoryData(
-            categoryId.replaceAll('_', ' '),
-            subcategoryId.replaceAll('_', ' ')
-          ).subsubcategories"
+          v-for="subsubcategory in filteredSubsubcategories"
           :key="subsubcategory"
         >
           <Table :data="subsubcategory" />
@@ -40,6 +29,12 @@
       </div>
     </Container>
   </div>
+  <div>
+    <div v-for="item in filteredSubsubcategories" :key="item">
+      {{ item.title }}
+    </div>
+  </div>
+  <input type="search" placeholder="start typing" v-model="searchPhrase" />
 </template>
 
 <script>
@@ -49,6 +44,25 @@ import Table from "../components/Table.vue";
 import ErrorMessage from "../components/ErrorMessage.vue";
 export default {
   name: "CategoryView",
+  data() {
+    return {
+      filteredSubsubcategories: [],
+      searchPhrase: "",
+    };
+  },
+  watch: {
+    searchPhrase() {
+      this.filteredSubsubcategories = this.$store.getters
+        .categoryData(
+          this.categoryId.replaceAll("_", " "),
+          this.subcategoryId.replaceAll("_", " ")
+        )
+        .subsubcategories.filter((category) =>
+          category.title.toLowerCase().includes(this.searchPhrase)
+        );
+    },
+  },
+
   components: {
     Container,
     LabelInput,

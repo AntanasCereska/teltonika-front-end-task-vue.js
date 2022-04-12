@@ -20,7 +20,12 @@
           {{ category.title }}</a
         >
         <span class="expandable-list__action-buttons">
-          <ButtonIcon iconType="trash" iconSize="lg" backgroundColor />
+          <ButtonIcon
+            iconType="trash"
+            iconSize="lg"
+            backgroundColor
+            @btn-click="handleDeleteCategory(category.title)"
+          />
           <ButtonIcon iconType="download" iconSize="lg" backgroundColor />
         </span>
       </span>
@@ -65,6 +70,11 @@ export default {
   methods: {
     handleToggleDropdown() {
       this.toggleDropdown = !this.toggleDropdown;
+    },
+    handleDeleteCategory(categoryTitle) {
+      if (confirm("Do you want to delete '" + categoryTitle + "' category?")) {
+        this.$store.commit("deleteCategory", categoryTitle);
+      }
     },
   },
   data() {

@@ -16,7 +16,7 @@
       <i class="label-input__icon"
         ><ButtonIcon
           v-if="type === 'password'"
-          :iconType="[this.showPassword == 'password' ? 'eye' : 'eye-slash']"
+          :iconType="this.showPassword == 'password' ? 'eye' : 'eye-slash'"
           iconSize="md"
           @click="setShowPassword"
       /></i>

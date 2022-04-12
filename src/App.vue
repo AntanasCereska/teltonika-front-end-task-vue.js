@@ -1,9 +1,12 @@
+//scenarijus:
+//esant kategorijoj x (pvz Admins)
+//ir ja istrynus apmeto errorais
+//nes reikia renderint data kurios neber
+//todle turbut reikia padaryt redirecta i kita route
+//ar kazka tokio
+
 <template>
   <div class="App">
-    <!--     <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav> -->
     <div class="App__header"><Header /></div>
     <div class="App__base">
       <div class="App__navigation"><NavigationDesktop /></div>
@@ -52,7 +55,6 @@ export default {
     categories: {
       handler(newCategories) {
         localStorage.categories = JSON.stringify(newCategories);
-        console.log("AAA");
       },
       deep: true,
     },
