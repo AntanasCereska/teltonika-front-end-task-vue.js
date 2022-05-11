@@ -6,6 +6,7 @@ export default createStore({
     categories:
       JSON.parse(localStorage.getItem("categories")) || dummyLocalStorageData,
   },
+
   getters: {
     categoryData: (state) => (categoryId, subcategoryId) => {
       const categoryData = state.categories.find(
@@ -25,12 +26,19 @@ export default createStore({
     },
 
     addSubcategory(state, formValues) {
-      const subcategory = { title: formValues.subcategory_title, subsubcategories: [] };
-      state.categories[formValues.category_index].subcategories.push(subcategory)
+      const subcategory = {
+        title: formValues.subcategory_title,
+        subsubcategories: [],
+      };
+      state.categories[formValues.category_index].subcategories.push(
+        subcategory
+      );
     },
 
     deleteCategory(state, categoryTitle) {
-      state.categories = state.categories.filter((category) => category.title !== categoryTitle)
+      state.categories = state.categories.filter(
+        (category) => category.title !== categoryTitle
+      );
     },
 
     addUser(state, formValues) {
@@ -41,14 +49,14 @@ export default createStore({
         age: formValues.age,
         email: formValues.email,
         password: formValues.password,
-      }
-      state.categories[formValues.category_index].subcategories[formValues.subcategory_index].subsubcategories[formValues.subsubcategory_index].users.push(user)
+      };
+      state.categories[formValues.category_index].subcategories[
+        formValues.subcategory_index
+      ].subsubcategories[formValues.subsubcategory_index].users.push(user);
     },
   },
 
-  actions: {
-
-  },
+  actions: {},
 
   modules: {},
 });

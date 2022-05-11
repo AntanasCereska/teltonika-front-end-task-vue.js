@@ -7,13 +7,12 @@
       </div>
       <div class="new-user__div2">
         <LabelInput
-          label="First name"
-          type="text"
-          placeholder="sub category title"
-          v-model="formValues.first_name"
           @change="handleChange"
+          v-model="formValues.first_name"
+          label="First name"
           name="first_name"
-          :value="formValues.first_name"
+          placeholder="user first name"
+          type="text"
         />
         <ErrorMessage
           v-if="formErrors.first_name"
@@ -22,13 +21,12 @@
       </div>
       <div class="new-user__div3">
         <LabelInput
-          label="Last name"
-          type="text"
-          placeholder=" user last name"
-          v-model="formValues.last_name"
           @change="handleChange"
+          v-model="formValues.last_name"
+          label="Last name"
           name="last_name"
-          :value="formValues.last_name"
+          placeholder="user last name"
+          type="text"
         />
         <ErrorMessage
           v-if="formErrors.last_name"
@@ -37,46 +35,42 @@
       </div>
       <div class="new-user__div4">
         <LabelPicklist
-          label="Gender"
-          :options="genderOptions"
-          name="gender"
-          :value="formValues.gender"
           @change="handleChange"
+          :options="genderOptions"
+          label="Gender"
+          name="gender"
         />
         <ErrorMessage v-if="formErrors.gender" :text="formErrors.gender" />
       </div>
       <div class="new-user__div5">
         <LabelInput
-          label="Age"
-          type="number"
-          placeholder="user age"
-          v-model="formValues.age"
           @change="handleChange"
+          v-model="formValues.age"
+          label="Age"
           name="age"
-          :value="formValues.age"
+          placeholder="user age"
+          type="number"
         />
         <ErrorMessage v-if="formErrors.age" :text="formErrors.age" />
       </div>
       <div class="new-user__div6">
         <LabelInput
-          label="Email"
-          type="email"
-          placeholder="user email"
-          v-model="formValues.email"
           @change="handleChange"
+          v-model="formValues.email"
+          label="Email"
           name="email"
-          :value="formValues.email"
+          placeholder="user email"
+          type="email"
         />
         <ErrorMessage v-if="formErrors.email" :text="formErrors.email" />
       </div>
       <div class="new-user__div7">
         <LabelPicklist
-          label="Category"
-          name="category_title"
-          :value="formValues.category_title"
-          :options="$store.state.categories"
           @change="handleChange"
           v-model="formValues.category_title"
+          label="Category"
+          name="category_title"
+          :options="$store.state.categories"
         />
         <ErrorMessage
           v-if="formErrors.category_title"
@@ -85,15 +79,14 @@
       </div>
       <div class="new-user__div8">
         <LabelPicklist
-          label="Sub-category"
-          v-model="formValues.subcategory_title"
           @change="handleChange"
-          name="subcategory_title"
-          :value="formValues.subcategory_title"
+          v-model="formValues.subcategory_title"
           :options="
             $store.state.categories[this.formValues.category_index]
               ?.subcategories
           "
+          label="Sub-category"
+          name="subcategory_title"
         />
         <ErrorMessage
           v-if="formErrors.subcategory_title"
@@ -102,16 +95,15 @@
       </div>
       <div class="new-user__div9">
         <LabelPicklist
-          label="Sub-sub-category"
-          v-model="formValues.subsubcategory_title"
           @change="handleChange"
-          name="subsubcategory_title"
-          :value="formValues.subsubcategory_title"
+          v-model="formValues.subsubcategory_title"
           :options="
             $store.state.categories[this.formValues.category_index]
               ?.subcategories?.[this.formValues.subcategory_index]
               ?.subsubcategories
           "
+          label="Sub-sub-category"
+          name="subsubcategory_title"
         />
         <ErrorMessage
           v-if="formErrors.subsubcategory_title"
@@ -121,25 +113,23 @@
       </div>
       <div class="new-user__div10">
         <LabelInput
+          @change="handleChange"
+          v-model="formValues.password"
           label="Password"
           type="password"
-          placeholder="password"
-          v-model="formValues.password"
-          @change="handleChange"
+          placeholder="user password"
           name="password"
-          :value="formValues.password"
         />
         <ErrorMessage v-if="formErrors.password" :text="formErrors.password" />
       </div>
       <div class="new-user__div11">
         <LabelInput
-          label="Password confirm"
-          type="password"
-          placeholder="password"
-          v-model="formValues.password_confirm"
           @change="handleChange"
+          v-model="formValues.password_confirm"
+          label="Password confirm"
           name="password_confirm"
-          :value="formValues.password_confirm"
+          placeholder="user password"
+          type="password"
         />
         <ErrorMessage
           v-if="formErrors.password_confirm"

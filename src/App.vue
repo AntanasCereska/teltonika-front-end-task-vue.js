@@ -34,7 +34,7 @@ export default {
 
   data() {
     return {
-      categories: [],
+      categories: this.$store.categories,
     };
   },
 
@@ -54,6 +54,7 @@ export default {
   watch: {
     categories: {
       handler(newCategories) {
+        console.log("aaa");
         localStorage.categories = JSON.stringify(newCategories);
       },
       deep: true,

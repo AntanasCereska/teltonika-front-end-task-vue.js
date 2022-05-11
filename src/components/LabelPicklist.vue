@@ -2,12 +2,14 @@
   <div class="label-picklist">
     <label class="label-picklist__label">{{ label }}</label>
     <select
-      :disabled="!options || (options.length === 0 && true)"
       @change="onChange"
+      :disabled="!options || (options.length === 0 && true)"
       :name="name"
-      :value="value"
       class="label-picklist__select"
     >
+      <option :style="{ background: none }">
+        -- select {{ name.replaceAll("_", " ") }} --
+      </option>
       <option v-for="option in options" :key="option">
         {{ option.title || option }}
       </option>

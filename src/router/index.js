@@ -7,12 +7,18 @@ import CreateSubSubCategoryView from "../views/CreateSubSubCategoryView.vue";
 import SettingsView from "../views/SettingsView.vue";
 import CategoryView from "../views/CategoryView.vue";
 import NotFound404View from "../views/NotFound404View.vue";
+import TestView from "../views/TestView.vue";
 
 const routes = [
   {
     path: "/",
     name: "home",
     component: HomeView,
+  },
+  {
+    path: "/test",
+    name: "test",
+    component: TestView,
   },
   {
     path: "/new-user",

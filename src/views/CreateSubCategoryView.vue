@@ -4,12 +4,11 @@
       <h1 class="create-sub-category__title">Create Sub-Category</h1>
       <div>
         <LabelPicklist
+          @change="handleChange"
           v-model="formValues.category_title"
           :options="$store.state.categories"
-          name="category_title"
-          :value="formValues.category_title"
-          @change="handleChange"
           label="Select category"
+          name="category_title"
         />
         <ErrorMessage
           v-if="formErrors.category_title"
@@ -18,13 +17,12 @@
       </div>
       <div>
         <LabelInput
-          label="Sub-category title"
-          type="text"
-          placeholder="sub category title"
-          v-model="formValues.subcategory_title"
           @change="handleChange"
+          v-model="formValues.subcategory_title"
+          label="Sub-category title"
           name="subcategory_title"
-          :value="formValues.subcategory_title"
+          placeholder="sub category title"
+          type="text"
         />
         <ErrorMessage
           v-if="formErrors.subcategory_title"
@@ -121,5 +119,5 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 </style>

@@ -1,23 +1,22 @@
 <template>
   <div class="create-category">
-    <form class="create-category__form" @submit.prevent="handleSubmit">
+    <form class="create-category__form" @submit.prevent="addCategory">
       <h1 class="create-category__title">Create Category</h1>
+      {{ formErrors }}
+      {{ formValues }}
       <div>
         <LabelInput
-          label="Category title"
-          type="text"
-          placeholder="category title"
+          @change="onInputChange($event, 'category_title')"
           v-model="formValues.category_title"
-          @change="handleChange"
-          name="category_title"
-          :value="formValues.category_title"
+          label="Category title"
+          placeholder="category title"
+          type="text"
         />
-        <ErrorMessage
-          v-if="formErrors.category_title"
-          :text="formErrors.category_title"
-        />
+        <span v-for="(error, index) in formErrors.category_title" :key="index">
+          <ErrorMessage :text="error"
+        /></span>
       </div>
-      <Button text="Create category" />
+      <Button text="Create category" :disabled="!isFormValid" />
     </form>
   </div>
 </template>
@@ -25,10 +24,9 @@
 import Button from "../components/Button.vue";
 import LabelInput from "../components/LabelInput.vue";
 import ErrorMessage from "../components/ErrorMessage.vue";
-import { regexSpecialCharacters } from "../data/regex";
+import validationMixin from "../mixins/validationMixin";
 
-const initialaValues = { category_title: "" };
-
+//const initialalValues = { category_title: "" };
 export default {
   name: "CreateCategoryView",
   components: {
@@ -36,52 +34,41 @@ export default {
     Button,
     ErrorMessage,
   },
-
-  data() {
-    return {
-      formValues: initialaValues,
-      formErrors: {},
-      isSubmit: false,
-    };
+  data: () => ({
+    formValues: {
+      category_title: "",
+    },
+    formErrors: {},
+  }),
+  computed: {
+    isFormValid() {
+      return this.validateForm(this.formValues).formIsValid;
+    },
   },
-
   methods: {
-    handleChange(event) {
-      const { name, value } = event.target;
-      this.formValues = { ...this.formValues, [name]: value };
+    onInputChange(event, inputName) {
+      console.log(event, inputName);
+      console.log(this.formValues.category_title);
+      const inputValue = event.target.value;
+      const inputErrors = this.validateField(inputName, inputValue);
+      if (inputErrors && inputErrors.length) {
+        this.formErrors[inputName] = inputErrors;
+      } else {
+        this.formErrors[inputName] = null;
+      }
     },
-
     handleSubmit() {
-      this.formErrors = this.validate(this.formValues);
-      this.isSubmit = true;
-      if (Object.keys(this.formErrors).length === 0 && this.isSubmit) {
-        alert(`Category ${this.formValues.category_title} was created`);
-        this.addCategory();
-        this.formValues = initialaValues;
+      if (this.formErrors.length === 0) {
+        this.addCategory;
       }
     },
-
-    validate(values) {
-      const errors = {};
-      if (!values.category_title) {
-        errors.category_title = "Category title is required";
-      } else if (
-        this.$store.state.categories.some(
-          (i) => i.title === values.category_title
-        )
-      ) {
-        errors.category_title = "Category with this title already exists";
-      } else if (regexSpecialCharacters.test(values.category_title)) {
-        errors.category_title = "Special characters not allowed";
-      }
-      return errors;
-    },
-
     addCategory() {
+      alert("New category '" + this.formValues.category_title + "' was added");
       this.$store.commit("addCategory", this.formValues);
-      this.formValues = initialaValues;
+      this.formValues = { category_title: "" };
     },
   },
+  mixins: [validationMixin],
 };
 </script>
 
